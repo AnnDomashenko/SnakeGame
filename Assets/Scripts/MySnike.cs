@@ -12,8 +12,9 @@ public class MySnike : MonoBehaviour {
         public Button Up, Down, Right, Left;
         private Vector3 _direction = Vector3.up;
         private float _speed = 3;
-        private int Score=2;
-        public int quantityFood=7;
+        private int Score=0;
+        public int quantityFood=0;
+        public int record=0;
         private Vector3 _position;
         private Transform _selfTransform;
         private SpriteRenderer _render;
@@ -63,7 +64,7 @@ public class MySnike : MonoBehaviour {
                 {
                     var food=(FootTile)tile;
                     Score += food.FoodValue;
-                    textScore.GetComponent<Text>().text = "Score: "+(Score-2).ToString();
+                    textScore.GetComponent<Text>().text = "Score: "+(Score).ToString();
                     Items.SetTile (Items.WorldToCell (newPosition-new Vector3(0,1,0)), null);
                     AddBoneInTail ();
 
@@ -74,35 +75,42 @@ public class MySnike : MonoBehaviour {
 
             _oldPosition = newPosition;
 
-            if ((Score-2) == quantityFood)
+            if (Score == (record+quantityFood))
             {
-                textWin.SetActive(true);
+                //textWin.SetActive(true);
+                record = Score;
+                FoodSet();
             }
         }
 
     public void FoodSet()
     {
+        quantityFood = quantityFood + 2;
         Vector3 randomPosition;
         int x;
         int y;
         for (int i = 0; i < quantityFood; i++)
         {
-             int rX = Random.Range(-9, 9);
-             int rY = Random.Range(-6, 6);
-           
-            if ((rX==0 &&rY==-1)||(rX==0 && rY==-2)||(rX==0 && rY==-3)) {
-                x = 2;
-                y = 2;
-            }
-            else { x = rX;
+            int rX = Random.Range(-9, 9);
+            int rY = Random.Range(-6, 6);
+
+            if ((rX != 0 && rY != -1) || (rX != 0 && rY != -2) || (rX != 0 && rY != -3))
+            {
+                x = rX;
                 y = rY;
             }
+            else
+            {
+                x = Random.Range(1, 9); ;
+                y = Random.Range(0, 6); ;
+            }
             randomPosition = new Vector3(x, y, 0);
-            if (Items.GetTile(Items.WorldToCell(randomPosition))==null) {
-                Items.SetTile(Items.WorldToCell(randomPosition), Food); }
+            if (Items.GetTile(Items.WorldToCell(randomPosition)) == null)
+            {
+                Items.SetTile(Items.WorldToCell(randomPosition), Food);
+            }
             else { quantityFood++; }
         }
-
     }
 
     public void TakeDemage(float demage){
@@ -162,7 +170,7 @@ public class MySnike : MonoBehaviour {
         public void AddBoneInTail()
         {
 
-            if(_tail.Length==Score){return;}
+            if(_tail.Length==Score+2){return;}
 
             System.Array.Resize (ref _tail,(_tail.Length+1));
             _tail [_tail.Length - 1] = Instantiate (_tail[_tail.Length-2]);

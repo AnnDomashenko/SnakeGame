@@ -166,7 +166,7 @@ Camera:
   far clip plane: 1000.01
   field of view: 74
   orthographic: 1
-  orthographic size: 7.5
+  orthographic size: 7.4208674
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -595,7 +595,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300020, guid: 7cdf6b877e01c1a46b1b9ad14554722b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1282,7 +1282,8 @@ MonoBehaviour:
   Down: {fileID: 1555270028}
   Right: {fileID: 1007609009}
   Left: {fileID: 474462569}
-  quantityFood: 5
+  quantityFood: 0
+  record: 0
   _tail:
   - {fileID: 1753561366}
   - {fileID: 760982111}
@@ -8765,7 +8766,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300012, guid: 7cdf6b877e01c1a46b1b9ad14554722b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
