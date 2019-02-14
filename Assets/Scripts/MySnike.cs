@@ -38,7 +38,7 @@ public class MySnike : MonoBehaviour {
             _position = _selfTransform.position;
             _maxValue = _currentValue;
             Down.enabled = false;
-        FoodSet();
+        FirstSetFood();
         
 
         }
@@ -75,17 +75,45 @@ public class MySnike : MonoBehaviour {
 
             _oldPosition = newPosition;
 
-            if (Score == (record+quantityFood))
+        if (Score == (record + quantityFood))
+        {
+            if (Score == 112)
             {
-                //textWin.SetActive(true);
+                textWin.SetActive(true);
+                _speed = 0;
+            }
+            else
+            {
                 record = Score;
                 FoodSet();
+            }
+        
             }
         }
 
     public void FoodSet()
     {
         quantityFood = quantityFood + 2;
+        int food = quantityFood;
+        Vector3 randomPosition;
+        int x;
+        int y;
+        for (int i = 0; i < food; i++)
+        {
+            x = Random.Range(-9, 9);
+            y = Random.Range(-6, 6);
+
+            randomPosition = new Vector3(x, y, 0);
+            if (Items.GetTile(Items.WorldToCell(randomPosition)) == null)
+            {
+                Items.SetTile(Items.WorldToCell(randomPosition), Food);
+            }
+            else { food++; }
+        }
+    }
+
+    public void FirstSetFood() {
+        quantityFood = 2;
         Vector3 randomPosition;
         int x;
         int y;
